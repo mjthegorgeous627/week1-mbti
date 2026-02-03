@@ -1,14 +1,186 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+  <title>MBTI 관계 분석기</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(180deg, #020617, #020617);
+      color: #e5e7eb;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 64px 20px 140px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      text-align: center;
+      color: #9ca3af;
+      margin-bottom: 56px;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 22px;
+      padding: 36px;
+      margin-bottom: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    h2 {
+      font-size: 20px;
+      margin-bottom: 18px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #c7d2fe;
+      font-size: 14px;
+    }
+    select, button {
+      width: 100%;
+      padding: 16px;
+      border-radius: 14px;
+      border: none;
+      background: #020617;
+      color: #f9fafb;
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+    button {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    .hidden { display: none; }
+    .result { line-height: 2; font-size: 15.5px; }
+    .section-title {
+      margin-top: 36px;
+      margin-bottom: 12px;
+      font-weight: 600;
+      color: #a5b4fc;
+      font-size: 16px;
+    }
+    .highlight { color: #fbbf24; font-weight: 600; }
+  </style>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+  <div class="container">
+    <h1>MBTI 관계 분석</h1>
+    <div class="subtitle">
+      같은 성격도, 어떤 관계에 놓이느냐에 따라 전혀 다르게 작동합니다.
+    </div>
+
+    <div class="card">
+      <h2>두 사람의 관계</h2>
+      <select id="relation">
+        <option value="couple">연인 · 부부</option>
+        <option value="friend">친구</option>
+        <option value="family">가족</option>
+        <option value="work">직장 관계</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <div id="coupleRoles" class="row">
+        <div>
+          <label>관계 속 위치</label>
+          <select id="role1">
+            <option value="girlfriend">여자친구</option>
+            <option value="boyfriend">남자친구</option>
+          </select>
+        </div>
+        <div>
+          <label>관계 속 위치</label>
+          <select id="role2">
+            <option value="boyfriend">남자친구</option>
+            <option value="girlfriend">여자친구</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>MBTI</label>
+          <select id="mbti1"></select>
+        </div>
+        <div>
+          <label>MBTI</label>
+          <select id="mbti2"></select>
+        </div>
+      </div>
+    </div>
+
+    <button id="analyzeBtn">관계 분석 보기</button>
+
+    <div id="result" class="card result" style="display:none"></div>
+  </div>
+
+  <script>
+    const mbtis = ['INTJ','INTP','ENTJ','ENTP','INFJ','INFP','ENFJ','ENFP','ISTJ','ISFJ','ESTJ','ESFJ','ISTP','ISFP','ESTP','ESFP'];
+
+    const mbti1 = document.getElementById('mbti1');
+    const mbti2 = document.getElementById('mbti2');
+    const relation = document.getElementById('relation');
+    const resultEl = document.getElementById('result');
+    const coupleRoles = document.getElementById('coupleRoles');
+
+    mbtis.forEach(m => {
+      mbti1.insertAdjacentHTML('beforeend', `<option value="${m}">${m}</option>`);
+      mbti2.insertAdjacentHTML('beforeend', `<option value="${m}">${m}</option>`);
+    });
+
+    function updateRelationUI() {
+      coupleRoles.classList.toggle('hidden', relation.value !== 'couple');
+    }
+
+    relation.addEventListener('change', updateRelationUI);
+    updateRelationUI();
+
+    function analyze() {
+      const rText = relation.options[relation.selectedIndex].text;
+      const m1 = mbti1.value;
+      const m2 = mbti2.value;
+
+      let intro = `${rText}에서 ${m1}와 ${m2}의 관계는 성향의 좋고 나쁨이 아니라, 서로를 이해하는 방식의 차이에서 밀도가 달라집니다.`;
+
+      if (relation.value === 'couple') {
+        const role1 = document.getElementById('role1').value === 'girlfriend' ? '여자친구' : '남자친구';
+        const role2 = document.getElementById('role2').value === 'girlfriend' ? '여자친구' : '남자친구';
+        intro = `${rText} 관계에서 ${role1}인 ${m1}, 그리고 ${role2}인 ${m2}는 사랑을 표현하고 받아들이는 방식이 다르게 작동하는 경우가 많습니다.`;
+      }
+
+      resultEl.style.display = 'block';
+      resultEl.innerHTML = `
+        <div class="section-title">관계의 기본 흐름</div>
+        <p>${intro}</p>
+
+        <div class="section-title">자주 반복되는 장면</div>
+        <p>한쪽은 충분히 신경 쓰고 있다고 느끼지만, 다른 한쪽은 그 마음을 체감하지 못하는 순간이 반복되기 쉽습니다. 이때 서운함은 말로 표현되지 않고 쌓이는 경우가 많습니다.</p>
+
+        <div class="section-title">감정이 어긋나는 이유</div>
+        <p>${m1}는 상황을 자기 기준으로 소화한 뒤 반응하는 편이고, ${m2}는 상대의 반응을 통해 자신의 감정을 확인하려는 경향이 있습니다. 이 차이는 오해로 이어지기 쉽지만, 악의 때문은 아닙니다.</p>
+
+        <div class="section-title">관계를 편안하게 만드는 관점</div>
+        <p>이 관계에서 중요한 것은 누가 더 옳은지가 아니라, <span class="highlight">서로가 다르게 신경 쓰고 있다는 사실을 먼저 인정하는 것</span>입니다. 이해받고 싶다는 마음을 조금만 더 구체적으로 표현해 보세요.</p>
+      `;
+    }
+
+    document.getElementById('analyzeBtn').addEventListener('click', analyze);
+  </script>
 </body>
 </html>
