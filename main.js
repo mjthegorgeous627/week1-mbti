@@ -50,23 +50,24 @@ function analyze() {
 }
 
 function toggleTheme() {
-    body.classList.toggle('light-mode');
-    if (body.classList.contains('light-mode')) {
-        localStorage.setItem('theme', 'light-mode');
-        themeToggle.textContent = '다크 모드';
+    body.classList.toggle('dark-mode');
+    if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark-mode');
+        themeToggle.textContent = '라이트 모드'; // In dark mode, button shows "Light Mode"
     } else {
         localStorage.removeItem('theme');
-        themeToggle.textContent = '라이트 모드';
+        themeToggle.textContent = '다크 모드'; // In light mode, button shows "Dark Mode"
     }
 }
 
 function applyTheme() {
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light-mode') {
-        body.classList.add('light-mode');
-        themeToggle.textContent = '다크 모드';
-    } else {
+    if (savedTheme === 'dark-mode') {
+        body.classList.add('dark-mode');
         themeToggle.textContent = '라이트 모드';
+    } else {
+        body.classList.remove('dark-mode'); // Ensure no dark mode class for light
+        themeToggle.textContent = '다크 모드';
     }
 }
 

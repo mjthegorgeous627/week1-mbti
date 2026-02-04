@@ -164,6 +164,19 @@ body.dark-mode .result {
     margin-bottom: 0;
 }
 
+article img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Ensures it behaves like a block element, good for spacing */
+    margin: 20px auto; /* Center image and add vertical spacing */
+    border-radius: 8px; /* Soften edges */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+
+body.dark-mode article img {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Darker shadow for dark mode */
+}
+
 #theme-toggle {
     width: 40px;
     height: 40px;
