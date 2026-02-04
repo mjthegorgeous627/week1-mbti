@@ -53,10 +53,10 @@ function toggleTheme() {
     body.classList.toggle('dark-mode');
     if (body.classList.contains('dark-mode')) {
         localStorage.setItem('theme', 'dark-mode');
-        themeToggle.textContent = '라이트 모드'; // In dark mode, button shows "Light Mode"
+        themeToggle.setAttribute('aria-label', '라이트 모드로 변경'); // 다크 모드일 때, 라이트 모드로 변경 버튼 텍스트
     } else {
         localStorage.removeItem('theme');
-        themeToggle.textContent = '다크 모드'; // In light mode, button shows "Dark Mode"
+        themeToggle.setAttribute('aria-label', '다크 모드로 변경'); // 라이트 모드일 때, 다크 모드로 변경 버튼 텍스트
     }
 }
 
@@ -64,10 +64,10 @@ function applyTheme() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark-mode') {
         body.classList.add('dark-mode');
-        themeToggle.textContent = '라이트 모드';
+        themeToggle.setAttribute('aria-label', '라이트 모드로 변경');
     } else {
-        body.classList.remove('dark-mode'); // Ensure no dark mode class for light
-        themeToggle.textContent = '다크 모드';
+        body.classList.remove('dark-mode');
+        themeToggle.setAttribute('aria-label', '다크 모드로 변경');
     }
 }
 

@@ -184,7 +184,7 @@ body.dark-mode article img {
     border-radius: 50%;
     border: none;
     cursor: pointer;
-    font-size: 24px;
+    /* font-size: 24px; 이 부분은 텍스트를 숨기므로 필요 없습니다. */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -194,6 +194,8 @@ body.dark-mode article img {
     background-position: center;
     background-size: 70%;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    text-indent: -9999px; /* 텍스트를 시각적으로 숨김 */
+    overflow: hidden; /* 숨겨진 텍스트가 넘치지 않도록 */
 }
 
 body.dark-mode #theme-toggle {
