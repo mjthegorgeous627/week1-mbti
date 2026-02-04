@@ -53,10 +53,10 @@ function toggleTheme() {
     body.classList.toggle('light-mode');
     if (body.classList.contains('light-mode')) {
         localStorage.setItem('theme', 'light-mode');
-        themeToggle.textContent = 'Dark Mode';
+        themeToggle.textContent = '다크 모드';
     } else {
         localStorage.removeItem('theme');
-        themeToggle.textContent = 'White Mode';
+        themeToggle.textContent = '라이트 모드';
     }
 }
 
@@ -64,9 +64,9 @@ function applyTheme() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light-mode') {
         body.classList.add('light-mode');
-        themeToggle.textContent = 'Dark Mode';
+        themeToggle.textContent = '다크 모드';
     } else {
-        themeToggle.textContent = 'White Mode';
+        themeToggle.textContent = '라이트 모드';
     }
 }
 
