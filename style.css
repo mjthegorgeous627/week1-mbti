@@ -98,16 +98,42 @@ body {
   }
   .highlight { color: var(--highlight-color); font-weight: 600; }
   
+.site-header {
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+  }
+  .site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    margin:0 auto;
+  }
+  .site-header nav a {
+    margin-right: 20px;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .content-page {
+    padding-top: 40px;
+  }
+  .content-page h1, .content-page h2 {
+    text-align: left;
+  }
+  .content-page p {
+    line-height: 1.8;
+  }
+
   #theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    width: auto;
+    height: auto;
+    padding: 8px 12px;
+    border-radius: 10px;
     background: var(--select-bg);
     color: var(--select-text);
     cursor: pointer;
-    z-index: 100;
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    margin-bottom: 0;
   }
   
