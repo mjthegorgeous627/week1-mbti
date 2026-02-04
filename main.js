@@ -53,15 +53,20 @@ function toggleTheme() {
     body.classList.toggle('light-mode');
     if (body.classList.contains('light-mode')) {
         localStorage.setItem('theme', 'light-mode');
+        themeToggle.textContent = 'Dark Mode';
     } else {
         localStorage.removeItem('theme');
+        themeToggle.textContent = 'White Mode';
     }
 }
 
 function applyTheme() {
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        body.classList.add(savedTheme);
+    if (savedTheme === 'light-mode') {
+        body.classList.add('light-mode');
+        themeToggle.textContent = 'Dark Mode';
+    } else {
+        themeToggle.textContent = 'White Mode';
     }
 }
 
