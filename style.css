@@ -1,1 +1,113 @@
-/* Add styles here */
+:root {
+    --bg-gradient: linear-gradient(180deg, #020617, #020617);
+    --text-color: #e5e7eb;
+    --subtitle-color: #9ca3af;
+    --card-bg: rgba(15, 23, 42, 0.9);
+    --card-shadow: 0 20px 40px rgba(0,0,0,0.45);
+    --label-color: #c7d2fe;
+    --select-bg: #020617;
+    --select-text: #f9fafb;
+    --section-title-color: #a5b4fc;
+    --highlight-color: #fbbf24;
+}
+
+body.light-mode {
+    --bg-gradient: linear-gradient(180deg, #f3f4f6, #d1d5db);
+    --text-color: #111827;
+    --subtitle-color: #4b5563;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --card-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    --label-color: #4338ca;
+    --select-bg: #e5e7eb;
+    --select-text: #111827;
+    --section-title-color: #4f46e5;
+    --highlight-color: #f59e0b;
+}
+
+
+body {
+    margin: 0;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-color);
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 64px 20px 140px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle {
+    text-align: center;
+    color: var(--subtitle-color);
+    margin-bottom: 56px;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  .card {
+    background: var(--card-bg);
+    border-radius: 22px;
+    padding: 36px;
+    margin-bottom: 28px;
+    box-shadow: var(--card-shadow);
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  h2 {
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--label-color);
+    font-size: 14px;
+  }
+  select, button {
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+    border: none;
+    background: var(--select-bg);
+    color: var(--select-text);
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+  button {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .hidden { display: none; }
+  .result { line-height: 2; font-size: 15.5px; }
+  .section-title {
+    margin-top: 36px;
+    margin-bottom: 12px;
+    font-weight: 600;
+    color: var(--section-title-color);
+    font-size: 16px;
+  }
+  .highlight { color: var(--highlight-color); font-weight: 600; }
+  
+  #theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--select-bg);
+    color: var(--select-text);
+    cursor: pointer;
+    z-index: 100;
+  }
+  
